@@ -1,0 +1,638 @@
+$white: rgb(255, 255, 255);
+$midnight: rgb(18, 23, 33);
+$lightgrey: rgb(244, 246, 248);
+$lightviolet: rgb(147, 155, 244);
+$grey: rgb(157, 174, 194);
+$darkgrey: rgb(110, 128, 152);
+$violet: rgb(89, 100, 224);
+$darkblue: rgb(25, 32, 45);
+
+.App {
+  width: 100%;
+  header {
+    background-image: url("./assets/desktop/bg-pattern-header.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    z-index: 1;
+    .brand {
+      max-width: 1110px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      padding: 32px 24px;
+      align-items: center;
+      .brand-name {
+        font-size: 32px;
+        font-weight: 700;
+        color: $white;
+      }
+      .switch-container {
+        .switch {
+          width: 40px;
+          height: 20px;
+          border-radius: 20px;
+          background-color: $white;
+          position: relative;
+          .slider {
+            display: block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #5964e0;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.2s ease;
+          }
+          &.active {
+            background-color: $white;
+          }
+          &.active .slider {
+            transform: translateX(20px);
+          }
+        }
+      }
+      .filter {
+        position: absolute;
+        max-width: 1110px;
+        background-color: $white;
+        border-radius: 8px;
+        padding: 0px 16px 0px 16px;
+        display: flex;
+        bottom: -48px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 80px;
+        align-items: center;
+        .filter-by-location,
+        .filter-by-title,
+        .filter-by-contract,
+        .button-group {
+          height: 100%;
+          display: flex;
+          flex-grow: 1;
+          align-items: center;
+        }
+        .filter-by-location,
+        .filter-by-title {
+          border-right: 1px solid rgb(227, 227, 227);
+          input[type="search"] {
+            flex-grow: 1;
+            border: none;
+            &:focus {
+              border: none;
+              outline: none;
+            }
+          }
+        }
+        .filter-by-location .pinIcon,
+        .filter-by-title .searchIcon {
+          width: 24px;
+          height: 24px;
+          margin: 0 16px;
+          path {
+            fill: $violet;
+          }
+        }
+        .filter-by-contract {
+          display: flex;
+          justify-content: flex-end;
+          flex-grow: 0;
+          .checkbox-group,
+          .button-group {
+            display: flex;
+          }
+          .checkbox-group {
+            width: 176px;
+            margin-right: 16px;
+            input[type="checkbox"] {
+              margin: 0 16px;
+              width: 24px;
+              height: 24px;
+              border: none;
+              &::after {
+                content: "Full Time Only";
+                display: block;
+                text-align: right;
+                width: 60px;
+                white-space: nowrap;
+                margin-left: 40px;
+                font-weight: 700;
+              }
+            }
+          }
+          .button-group {
+            flex-grow: 0;
+            .show-extra-filters {
+              display: none;
+            }
+            .search-button {
+              padding: 0 32px;
+              .button-Icon {
+                display: none;
+              }
+            }
+          }
+        }
+        .modal {
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          top: -104px;
+          left: -26px;
+          width: 100vw;
+          height: 100vh;
+          background-color: rgba($color: $midnight, $alpha: 0.5);
+        }
+        .modal-style {
+          width: 327px;
+          background-color: $white;
+          border-radius: 6px;
+          .input-wrapper {
+            padding: 24px 24px;
+            display: flex;
+            input[type="search"] {
+              margin-left: 16px;
+              border-radius: 6px;
+              width: 100%;
+              border: none;
+              outline: none;
+            }
+            input[type="checkbox"] {
+              margin-right: 16px;
+              width: 24px;
+              height: 24px;
+            }
+            label {
+              font-weight: 700;
+            }
+            .icon-wrapper {
+              display: flex;
+              justify-content: center;
+              width: 28px;
+              height: 28px;
+              img {
+                width: 24px;
+                height: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  main {
+    margin: 0 auto;
+    max-width: 1110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 56px;
+    .jobs {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      row-gap: 48px;
+      margin-top: 320px;
+      display: grid;
+      .job-post {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 350px;
+        height: 228px;
+        position: relative;
+        padding: 32px;
+        background-color: $white;
+        border-radius: 8px;
+        .company-logo {
+          position: absolute;
+          border-radius: 16px;
+          top: -25px;
+          left: 32px;
+        }
+        .postedAt {
+          font-size: 16px;
+          color: $darkgrey;
+          .separator {
+            width: 4px;
+            height: 4px;
+            background-color: $darkgrey;
+            border-radius: 32px;
+            display: inline-block;
+            margin: 0 12px 0 12px;
+          }
+        }
+        .position {
+          font-size: 20px;
+          font-weight: 700;
+          color: $darkblue;
+        }
+        .componay-name {
+          font-size: 16px;
+          color: $darkgrey;
+        }
+        .location {
+          font-size: 14px;
+          color: $violet;
+          margin-top: 40px;
+          font-weight: 700;
+        }
+      }
+    }
+    button.more {
+      padding: 16px 32px;
+      font-weight: 700;
+      max-width: 152px;
+      align-self: center;
+      margin-bottom: 104px;
+    }
+  }
+  main.job-details {
+    width: 730px;
+    .company-info {
+      background-color: $white;
+      display: flex;
+      width: 100%;
+      height: 140px;
+      margin-top: 180px;
+      border-radius: 6px;
+      align-items: center;
+      .company-logo {
+        width: 140px;
+        height: 140px;
+        border-radius: 6px 0 0 6px;
+      }
+      .company-section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 32px;
+        flex-grow: 1;
+        .company-name {
+          font-size: 24px;
+          font-weight: 700;
+        }
+        .company-url {
+          color: $darkgrey;
+        }
+      }
+      .company-cta {
+        margin: 32px;
+        background-color: $lightgrey;
+        color: $violet;
+        font-weight: 700;
+      }
+    }
+    .position-details {
+      background-color: $white;
+      padding: 48px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-bottom: 128px;
+      .postedAt {
+        color: $darkgrey;
+        display: flex;
+        align-items: baseline;
+        .separator {
+          margin: 0 8px;
+          width: 4px;
+          height: 4px;
+          border-radius: 32px;
+          background-color: $darkgrey;
+        }
+      }
+      .about-position {
+        display: flex;
+        align-items: center;
+        .position-wrapper {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          .position {
+            font-size: 28px;
+            font-weight: 700;
+          }
+          .location {
+            color: $violet;
+            font-weight: 700;
+            font-size: 14px;
+          }
+        }
+        button {
+          font-weight: 700;
+        }
+      }
+      ol li,
+      ul li,
+      p {
+        color: $darkgrey;
+        line-height: 26px;
+      }
+      h3 {
+        font-size: 20px;
+      }
+      ol li,
+      ul li {
+        margin-left: 16px;
+        padding-left: 16px;
+      }
+    }
+    .button-container {
+      position: fixed;
+      display: flex;
+      bottom: 0;
+      left: 0;
+      background-color: $white;
+      width: 100%;
+      justify-content: center;
+      .position-container {
+        display: flex;
+        max-width: 730px;
+        width: 100%;
+        margin: 24px 0;
+        .position {
+          flex-grow: 1;
+        }
+        .position > div:first-child {
+          font-weight: 700;
+          margin-bottom: 4px;
+        }
+        .position > div:last-child {
+          color: $darkgrey;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+.light {
+  background-color: $lightgrey;
+}
+
+.dark {
+  background-color: $midnight;
+  header {
+    .brand {
+      .filter {
+        background-color: $darkblue;
+        .filter-by-location,
+        .filter-by-title {
+          border-right: 1px solid rgba(110, 128, 152, 0.4);
+          input[type="search"] {
+            background-color: $darkblue;
+            color: $white;
+          }
+        }
+        .filter-by-contract {
+          .checkbox-group {
+            input[type="checkbox"] {
+              &::after {
+                color: $white;
+              }
+            }
+          }
+          .button-group {
+            .show-extra-filters {
+              background-color: $darkblue;
+            }
+          }
+        }
+      }
+    }
+  }
+  main {
+    .jobs {
+      .job-post {
+        background-color: $darkblue;
+        .position {
+          color: $white;
+        }
+      }
+    }
+  }
+  main.job-details {
+    .company-info {
+      background-color: $darkblue;
+      .company-section {
+        .company-name {
+          color: $white;
+        }
+      }
+      .company-cta {
+        background-color: rgba(89, 100, 224, 0.1);
+      }
+    }
+    .position-details {
+      background-color: $darkblue;
+      .about-position {
+        .position-wrapper {
+          .position {
+            color: $white;
+          }
+        }
+      }
+      h3 {
+        color: $white;
+      }
+    }
+    .button-container {
+      background-color: $darkblue;
+    }
+    .button-container {
+      .position-container {
+        .position > div:first-child {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 376px) and (max-width: 768px) {
+  .App {
+    header {
+      background-image: url("./assets/mobile/bg-pattern-header.svg") no-repeat;
+      height: 160px;
+      .brand {
+        .filter {
+          max-width: 710px;
+          .filter-by-location,
+          .filter-by-title {
+            input[type="search"] {
+              width: 100%;
+            }
+          }
+          .filter-by-contract {
+            .checkbox-group {
+              width: 120px;
+              input[type="checkbox"] {
+                &::after {
+                  content: "Full Time";
+                  display: block;
+                  text-align: right;
+                  width: 60px;
+                  white-space: nowrap;
+                  margin-left: 40px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    main {
+      .jobs {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 11px;
+        row-gap: 64px;
+        margin-top: 288px;
+      }
+    }
+    main.job-details {
+      width: 689px;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .App {
+    header {
+      background-image: url("./assets/mobile/bg-pattern-header.svg");
+      height: 136px;
+      background-repeat: no-repeat;
+      .brand {
+        .filter {
+          max-width: 327px;
+          .filter-by-title {
+            border-right: none;
+            input[type="search"] {
+              width: 100%;
+            }
+            .searchIcon {
+              display: none;
+            }
+          }
+          .filter-by-location {
+            display: none;
+          }
+          .filter-by-contract {
+            .checkbox-group {
+              display: none;
+            }
+            .button-group {
+              .show-extra-filters {
+                display: block;
+                background-color: $white;
+              }
+              .search-button {
+                padding: 16px;
+                .button-Icon {
+                  display: block;
+                }
+                .buttonText {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    main {
+      .jobs {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        margin-top: 244px;
+        .job-post {
+          width: auto;
+          margin: 0 24px;
+        }
+      }
+    }
+    main.job-details {
+      width: 327px;
+      gap: 24px;
+      .company-info {
+        position: relative;
+        flex-direction: column;
+        height: 230px;
+        .company-logo {
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          border-radius: 16px;
+          top: -25px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .company-section {
+          margin-top: 16px;
+          justify-content: center;
+          align-items: center;
+        }
+        .company-cta {
+          margin-top: 0px;
+        }
+      }
+      .position-details {
+        padding: 40px 24px;
+        .about-position {
+          flex-direction: column;
+          gap: 48px;
+          .position-wrapper {
+            gap: 8px;
+            .position {
+              font-size: 20px;
+            }
+          }
+        }
+        button {
+          width: 100%;
+        }
+      }
+      .button-container {
+        .position-container {
+          .position {
+            display: none;
+          }
+          button {
+            font-weight: 700;
+            width: 100%;
+            margin: 0 24px;
+          }
+        }
+      }
+    }
+  }
+  .dark {
+    header {
+      .brand {
+        .filter {
+          .modal {
+            .modal-style {
+              background-color: $darkblue;
+              .input-wrapper {
+                input[type="search"] {
+                  background-color: $darkblue;
+                }
+                label {
+                  color: $white;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
